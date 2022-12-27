@@ -59,11 +59,11 @@ input:focus{
     background-color: rgb(228, 222, 222);
 }
   
-input:invalid{
+input:invalid, .invalid{
     border: 3px dashed red;
 }
 
-input:valid{
+input:valid, .valid{
     border: 5px solid green;
 }
 
