@@ -3,11 +3,12 @@ const email = document.getElementById("mail");
 const country = document.getElementById("country");
 const zipCode = document.getElementById("zip-code");
 const password = document.getElementById("password");
-// const confirmPassword = document.getElementById("confirm");
+const confirmPassword = document.getElementById("confirm");
 const mailError = document.querySelector("span.mail-error");
 const countryErrorVar = document.querySelector("span.country-error");
 const zipError = document.querySelector("span.zip-error");
 const passwordError = document.querySelector("span.password-error");
+const confirmPasswordErrorVar = document.querySelector("span.confirm-error");
 
 email.addEventListener("input", (event) => {
     if (email.validity.valid) {
@@ -45,6 +46,10 @@ password.addEventListener("input", (event) => {
     }
 });
 
+confirmPassword.addEventListener("input", (event) => {
+    confirmPasswordError()
+});
+
 form.addEventListener("submit", (event) => {
     if (!email.validity.valid) {
         emailError();
@@ -55,6 +60,8 @@ form.addEventListener("submit", (event) => {
         zipCodeError();
     } else if (!password.validity.valid) {
         pswError();
+    } else {
+        confirmPasswordError();
     }
     event.preventDefault();
 });
@@ -94,19 +101,24 @@ function zipCodeError() {
     }
 };
 
-function zipCodeError() {
-    if (zipCode.validity.valueMissing) {
-        zipError.textContent = "Enter zip code";
-    } else if (zipCode.validity.patternMismatch) {
-        zipError.textContent = "Please enter the right format.";
-    }
-};
-
 function showPassword() {
     let psw = document.getElementById("password");
+    let cPwd = document.getElementById("confirm");
     if (psw.type === "password") {
         psw.type = "text";
+        cPwd.type = "text";
     } else {
         psw.type = "password";
+        cPwd.type = "password";
+    }
+}
+
+function confirmPasswordError() {
+    const currentPassword = document.getElementById("password");
+    if (currentPassword.value !== confirmPassword.value) {
+        confirmPasswordErrorVar.textContent = "Passwords do not match";
+    } else {
+        confirmPasswordErrorVar.textContent = "";
+        confirmPassword.className = "error valid";
     }
 }
