@@ -27,11 +27,15 @@
       </div>
       <div id="form-item">
         <label for="password">Password: </label>
-        <input id="password" type="password" [a-zA-Z0-9+-%$#@]{8,} required />
+        <input id="password" type="password" pattern="[a-zA-Z0-9+-%$#@]{8,}" minlength="8" required />
+        <span class="password-error" aria-live="polite"></span>
+        <span id="showPSW">
+          <input type="checkbox" onclick="showPassword()"/> Show Password
+        </span>
       </div>
       <div id="form-item">
         <label for="confirm">Confirm Password:</label>
-        <input id="confirm" type="password" required />
+        <input id="confirm" type="password" pattern="[a-zA-Z0-9+-%$#@]{8,}" required />
       </div>
       <button type="submit">Submit</button>
     </form>
